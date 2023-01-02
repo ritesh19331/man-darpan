@@ -20,11 +20,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class Cutomers {
+public class Customers {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
 	private String name;
+	private String email;
+	
 	private LocalDate localDate;
 	
 	@Embedded

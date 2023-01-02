@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.http.HttpStatus;
+
+import com.shop.enums.OrderStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +28,7 @@ public class Orders {
 	private Integer orderId;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Cutomers customers;
+	private Customers customers;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Payments payments;
@@ -34,10 +38,13 @@ public class Orders {
 	
 	private LocalDate shipDate;
 	
-	private LocalDate deliveryDate;
+	private LocalDate orderDate;
 	
 	private Double total_order_amount;
 	
+	private OrderStatus orderStatus;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private OrderDetails orderDetails;
+	
 }
