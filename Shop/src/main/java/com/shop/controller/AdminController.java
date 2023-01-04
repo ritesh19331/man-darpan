@@ -36,6 +36,8 @@ public class AdminController {
 	@Autowired
 	private AdminLoginService adminLoginService;
 	
+
+	
 	@PostMapping("/register")
 	public ResponseEntity<Admin> adminRegisterHandler(@RequestBody Admin admin){
 		Admin ad = adminService.registerAdmin(admin);
@@ -54,64 +56,7 @@ public class AdminController {
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
 	
-	@PostMapping("/products/{key}")
-	public ResponseEntity<Products> addProductsHandler(@RequestBody Products products, @PathVariable String key){
-		Products  p = adminService.addProducts(products, key);
-		return new ResponseEntity<>(p,HttpStatus.ACCEPTED);
-	}
 	
-	@GetMapping("/orderdetails/{id}/{key}")
-	public ResponseEntity<OrderDetails> viewOrderDetailsHandler(@PathVariable Integer id , @PathVariable String key){
-		OrderDetails od = adminService.viewOrderDetails(id, key);
-		return new ResponseEntity<>(od,HttpStatus.OK);
-	}
 	
-	@GetMapping("/orders/{id}/{key}")
-	public ResponseEntity<Orders> viewOrdersByOrderIdHandler(@PathVariable Integer orderid , @PathVariable String key){
-		Orders od = ordersService.viewOrders(orderid, key);
-		return new ResponseEntity<>(od,HttpStatus.OK);
-	}
-	
-	@GetMapping("/orders/{key}")
-	public ResponseEntity<List<Orders>> viewOrdersByCustomerEmailHandler(@RequestParam("email") String email , @PathVariable String key){
-		List<Orders> list = ordersService.serachOrderByCustomersEmail(email, key);
-		return new ResponseEntity<>(list,HttpStatus.OK);
-	}
-	
-	@PostMapping("/orders/{key}")
-	public ResponseEntity<Orders> viewOrdersByCustomerIdHandler(@RequestBody Integer customerid, @PathVariable String key){
-		Orders od = ordersService.viewOrders(customerid, key);
-		return new ResponseEntity<>(od,HttpStatus.OK);
-	}
-	
-	@PostMapping("/category/{key}")
-	public ResponseEntity<Category> addCategoryHandler(@RequestBody Category category, @PathVariable String key){
-		Category  p = adminService.addCategory(category, key);
-		return new ResponseEntity<>(p,HttpStatus.OK);
-	}
-	
-	@PostMapping("/cancelledorders/{key}")
-	public ResponseEntity<List<Orders>> viewCancelledOrdersHandler(@PathVariable String key){
-		List<Orders> list = ordersService.viewCancelledOrders(key);
-		return new ResponseEntity<>(list,HttpStatus.OK);
-	}
-	
-	@GetMapping("/customers/{key}")
-	public ResponseEntity<List<Customers>> viewAllCustomersHandler(@PathVariable String key){
-		List<Customers> list = adminService.viewAllCustomers(key);
-		return new ResponseEntity<>(list,HttpStatus.OK);
-	}
-	
-	@GetMapping("/orders/date/{key}")
-	public ResponseEntity<List<Orders>> viewAllOrdersByDateHandler(@RequestParam("startdate") String date, @PathVariable String key){
-		List<Orders> list = ordersService.salesByDate(date, key);
-		return new ResponseEntity<>(list,HttpStatus.OK);
-	}
-	
-	@GetMapping("/orders/startdate/enddate/{key}")
-	public ResponseEntity<List<Orders>> viewAllOrdersByDateHandler(@RequestParam("startdate") String startDate,@RequestParam("enddate") String endDate, String key){
-		List<Orders> list = ordersService.salesByDuration(startDate, endDate, key);
-		return new ResponseEntity<>(list,HttpStatus.OK);
-	}
 	
 }

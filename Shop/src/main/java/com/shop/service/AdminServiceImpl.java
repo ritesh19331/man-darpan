@@ -64,26 +64,10 @@ public class AdminServiceImpl implements  AdminService {
 	}
 
 
-	@Override
-	public Products addProducts(Products product, String key) throws ProductException, AdminException {
-		checkCurrentSession(key);
-		if(product==null) {
-			throw new ProductException("Enter a Valid Product");
-		}
-		Products products =	prodDao.save(product);
-		return products;
-	}
+	
 
 
-	@Override
-	public OrderDetails viewOrderDetails(Integer id,String key) throws ProductException, AdminException {
-		checkCurrentSession(key);
-		Optional<OrderDetails> od =	orderDetailsDao.findById(id);
-		if(od.isEmpty())
-			throw new ProductException("Order Details Not Found for id :"+id);
-		
-		return od.get();
-	}
+	
 
 
 
@@ -97,27 +81,12 @@ public class AdminServiceImpl implements  AdminService {
 	}
 
 
-	@Override
-	public Category addCategory(Category category ,String key) throws ProductException, AdminException {
-		checkCurrentSession(key);
-		if(category==null)
-			throw new CategoryException("Enter proper details to add catgeory");
-		
-		return categoryDao.save(category);
-	}
+	
 
 
 	
 
 
-	@Override
-	public List<Customers> viewAllCustomers(String key) throws CustomerException {
-		checkCurrentSession(key);
-		List<Customers> list =	cuDao.findAll();
-		if(list.size()==0) 
-			throw new CustomerException("No Customer Found");
-		
-		return list;
-	}
+	
 	
 }

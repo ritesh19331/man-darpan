@@ -11,12 +11,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
-public class CurrentAdminSession {
-
+public class CurrentCustomerSession {
+	
 	@Id
 	@Column(unique = true)
 	private Integer id;

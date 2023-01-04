@@ -21,7 +21,7 @@ public class AdminLoginServiceImpl implements AdminLoginService{
 	private AdminDao adminDao;
 	
 	@Autowired
-	private CurrentSessionDao curDao;
+	private CurrentSessionDao currentSessionDao;
 	
 	@Override
 	public Admin login(String email, String password) throws AdminException {
@@ -36,7 +36,7 @@ public class AdminLoginServiceImpl implements AdminLoginService{
 		
 		String key = RandomString.make();
 		
-		curDao.save(new CurrentAdminSession(admin.getId(), key,LocalDateTime.now()));
+		currentSessionDao.save(new CurrentAdminSession(admin.getId(), key,LocalDateTime.now()));
 		
 		return admin;
 		
@@ -45,13 +45,23 @@ public class AdminLoginServiceImpl implements AdminLoginService{
 	@Override
 	public String logout(String key) throws AdminException {
 		
-		CurrentAdminSession cs = curDao.findByUuid(key);
+		CurrentAdminSession cs = currentSessionDao.findByUuid(key);
 		if(cs==null)
 			throw new AdminException("User Not Found With the Key : "+ key);
 		
-		curDao.deleteById(cs.getId());
+		currentSessionDao.deleteById(cs.getId());
 		return "User Logged Out Successfully";
 		
+	}
+	
+	
+	public CurrentAdminSession checkCurrentSession(String key) throws AdminException {
+		AdminLoginServiceImpl alsi = new AdminLoginServiceImpl();
+		CurrentAdminSession cs  =alsi.currentSessionDao.findByUuid(key);
+		if(cs==null)
+			throw new AdminException("Admin Not Logged in With "+key);
+		
+		return cs;
 	}
 	
 	
