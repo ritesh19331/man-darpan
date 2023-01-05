@@ -8,4 +8,6 @@ import com.shop.model.Customers;
 public interface CustomerService {
 	
 	public List<Customers> viewAllCustomers(String key) throws CustomerException;
+	
+	public Customers registerCustomer(Customers customer) throws CustomerException;
 }

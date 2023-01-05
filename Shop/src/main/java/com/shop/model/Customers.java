@@ -26,8 +26,10 @@ public class Customers {
 	private Integer customerId;
 	private String name;
 	private String email;
+	private String password;
 	
 	private LocalDate localDate;
+	
 	
 	@Embedded
 	private Address address;

@@ -38,4 +38,15 @@ public class CustomerServiceImpl implements CustomerService {
 		return cs;
 	}
 
+	@Override
+	public Customers registerCustomer(Customers customer) throws CustomerException {
+		Customers c =customersDao.findByEmail(customer.getEmail());
+		if(c!=null) {
+			throw new CustomerException("Customer already registered with this email...");
+		}
+		if(customer==null)
+			throw new CustomerException("Enter proper Customer Details");
+		return customersDao.save(customer);
+	}
+
 }
